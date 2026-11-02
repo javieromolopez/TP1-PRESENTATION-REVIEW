@@ -1,10 +1,10 @@
 # My presentation notes (Javier)
 
-TP1 presentation, Mon Nov 2, 1:30 PM, MC-225. My part: slides 10–13, 6:00 → 10:00 (4 minutes).
+TP1 presentation, Mon Nov 2, 1:30 PM, MC-225. My part: slides 10–14, 6:00 → 10:00 (4 minutes).
 Personal file, not part of the repo.
 
-**Timing:** slides 10 + 11 = 2:30 (what went wrong). Slides 12 + 13 = 1:30 (next steps and wrap-up).
-**If I'm running long:** on slide 11, say only the two numbers and move on.
+**Timing:** slides 10–12 = 2:30 (what went wrong: 10 ≈ 1:00, 11 + 12 ≈ 1:30). Slides 13 + 14 = 1:30 (next steps and wrap-up).
+**If I'm running long:** on slide 11, show the circuit, say GPT-4o called it good, and move on. On slide 12, just say the two scores.
 **In the deck:** → next, ← back, **N** shows my speaker notes.
 
 ---
@@ -14,7 +14,7 @@ He says something like "Javier will show what went wrong along the way." I start
 
 ---
 
-## Slide 10: The artist couldn't spell (≈1:15)
+## Slide 10: The artist couldn't spell (≈1:00)
 
 | On screen | What I say | What I remember (the why) |
 |---|---|---|
@@ -27,19 +27,31 @@ He says something like "Javier will show what went wrong along the way." I start
 
 ---
 
-## Slide 11: The critic got fooled (≈1:15, cut first if long)
+## Slide 11: The critic got fooled (≈0:40, the story)
 
 | On screen | What I say | What I remember (the why) |
 |---|---|---|
-| **9/15**, GPT-4o | "The second problem is scarier. Our critic, GPT-4o, looked at a circuit where the 'wire' label pointed into the battery, and said 'good.' So we built a test: 10 pictures, a good one and one with a planted mistake for each topic, and we ran each one three times. GPT-4o passed that broken circuit again, all three times, and overall it caught only 9 of the 15 planted mistakes." | "4 times" on the slide = once in our first run (Oct 25) + 3 times in the test. 15 = 5 broken pictures × 3 runs each. The answer key is `eval/expected.json`, and **I spot-checked the 5 broken pictures against it myself.** |
-| **Click:** **15/15**, MiMo | "A much cheaper model, MiMo, caught all 15, with no false alarms." | Zero false alarms on the 5 good pictures, so it didn't just flag everything. $0.013 vs $0.20 for the 30 calls, about 1/15 the price. |
-| **Click:** takeaway | "The lesson: an AI checking an AI still needs a test with known answers." | Both GPT-4o misses were a label pointing at the wrong part (circuit, and the flower's swapped anther and stigma). It reads label *text* well but doesn't follow the line. **Be fair:** we picked the circuit because GPT-4o had already missed it. The flower mistake was new, and it missed that too. |
-
-**Short version if I'm out of time:** "GPT-4o passed a broken circuit four times. On our test, it caught 9 of 15 mistakes; a cheaper model caught all 15."
+| The circuit picture | "The second problem is scarier. This is a real picture from our first run." | It's the actual image from our first end-to-end run on Oct 25, not one we made for the test. |
+| **Click:** red rings on "wire" and "battery" | "The 'wire' label points into the battery, and 'battery' points at nothing." | Every word is spelled right. The mistake is *where* the labels point. |
+| **Click:** verdict card, "good" | "We gave it to our critic, GPT-4o. It said 'good': every part present." | GPT-4o passed this picture 4 times in total: this first run, plus all 3 runs in the test (next slide). |
+| **Click:** takeaway | "It looked right, so it passed. So we needed a test where we already know the answer." | This is the reason the test exists. |
 
 ---
 
-## Slide 12: Next (≈1:10)
+## Slide 12: So we built a test (≈0:50, cut first if long)
+
+| On screen | What I say | What I remember (the why) |
+|---|---|---|
+| The 5 broken pictures | "We made 5 broken pictures, one per topic, each with one mistake we planted on purpose, and I checked the answer key against them myself. Each picture went to the critic three times, and the results were the same every time." | The answer key is `eval/expected.json`; I spot-checked all 5 on Nov 2. 3 runs each to see if the critic is consistent, and it was. |
+| **Click:** GPT-4o row, ✓✓✓✗✗, **3/5** | "GPT-4o caught 3 of the 5. It missed the circuit again, and the flower, where two labels were swapped." | Same as "9 of 15" in `CHECKS.md` (5 pictures × 3 runs). I say 3 of 5 so it doesn't sound like slide 10's "9 of 15 pictures", which was a different test (the artist, not the critic). |
+| **Click:** MiMo row, ✓✓✓✓✓, **5/5** | "A much cheaper model, MiMo, caught all 5, with no false alarms on the good pictures, at about a fifteenth of the price." | $0.013 vs $0.20 for the 30 calls. Zero false alarms means it didn't just flag everything. |
+| **Click:** takeaway | "Both misses were a label pointing at the wrong part: GPT-4o reads the words but doesn't follow the line. To be fair, we picked the circuit because GPT-4o had already missed it, but the flower was new and it missed that too." | An AI checking an AI still needs a test with known answers. |
+
+**Short version if I'm out of time:** "GPT-4o called this broken circuit 'good.' On a test with 5 planted mistakes, it caught 3; a cheaper model caught all 5."
+
+---
+
+## Slide 13: Next (≈1:10)
 
 | On screen | What I say | What I remember (the why) |
 |---|---|---|
@@ -49,7 +61,7 @@ He says something like "Javier will show what went wrong along the way." I start
 
 ---
 
-## Slide 13: Questions (≈0:20)
+## Slide 14: Questions (≈0:20)
 
 **Say:** "In one sentence: the AI draws, a second AI looks, and our code decides the grade. Thank you. Questions?" → open the peer notes form.
 
@@ -71,6 +83,6 @@ He says something like "Javier will show what went wrong along the way." I start
 | Where was the agent confidently wrong? | It said `checker.py` had no tests. I knew I'd written them. It had only looked in TP1; they were in my Week 6 folder. That's how we found they never got copied over. |
 
 ## Ground rules
-- Stay under my 4 minutes. Cut slide 11 to the short version first.
+- Stay under my 4 minutes. Cut slide 12 to the short version first.
 - Don't read from the screen for more than a few seconds.
 - Only say things I could explain if asked.
